@@ -21,7 +21,8 @@ public class App {
             //Se cierra la conexión 
             con.close();
         } catch (Exception e) {
-            //Imprimir errores 
+            //Imprimir errores
+            System.out.print("Ocurrió un error: ");
             System.out.println(e);
         }
     }
