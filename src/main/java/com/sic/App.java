@@ -12,24 +12,28 @@ public class App {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/datos", "luissanher", "pass1234");
             //Nuevo statement para llamada de datos
             Statement stmt = con.createStatement();
+            ResultSet rs;
 
-            System.out.println("Datos sin ordenar");
-            //Creación de Query | llamada a todos los datos de la tabla alumnos
-            ResultSet rs = stmt.executeQuery("select * from alumnos");
-            //Ciclo de todos los elementos obtenidos por el query
+            System.out.println("\t\tDatos sin ordenar");
+            rs = stmt.executeQuery("select * from alumnos");
             while (rs.next())
-                //Impresión de los valores
-                System.out.println(rs.getString(1) + "\t" + rs.getString(2) + " " + rs.getString(3) + "\t" + rs.getString(4));
+                System.out.println(rs.getString(1) + "\t" + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + "\t" + rs.getString(5) + "\t" + rs.getString(6));
 
-            System.out.println("Datos ordenados");
+            System.out.println("\t\tDatos ordenados por edad");
+            rs = stmt.executeQuery("SELECT * FROM alumnos ORDER BY Edad ASC");
+            while (rs.next())
+                System.out.println(rs.getString(1) + "\t" + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + "\t" + rs.getString(5) + "\t" + rs.getString(6));
 
-            //Creación de Query | llamada a todos los datos de la tabla alumnos
-            ResultSet rs1 = stmt.executeQuery("SELECT * FROM alumnos ORDER BY Edad ASC");
-            //Ciclo de todos los elementos obtenidos por el query
-            while (rs1.next())
-                //Impresión de los valores
-                System.out.println(rs1.getString(1) + "\t" + rs1.getString(2) + " " + rs1.getString(3) + "\t" + rs1.getString(4));
-            //Se cierra la conexión 
+            System.out.println("\t\tDatos ordenados por Unidad");
+            rs = stmt.executeQuery("SELECT * FROM alumnos ORDER BY Unidad ASC");
+            while (rs.next())
+                System.out.println(rs.getString(1) + "\t" + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + "\t" + rs.getString(5) + "\t" + rs.getString(6));
+
+            System.out.println("\t\tDatos ordenados por Apellido");
+            rs = stmt.executeQuery("SELECT * FROM alumnos ORDER BY ApPaterno ASC");
+            while (rs.next())
+                System.out.println(rs.getString(1) + "\t" + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + "\t" + rs.getString(5) + "\t" + rs.getString(6));
+
             con.close();
         } catch (Exception e) {
             //Imprimir errores
