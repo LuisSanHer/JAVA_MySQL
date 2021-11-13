@@ -12,12 +12,23 @@ public class App {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/datos", "luissanher", "pass1234");
             //Nuevo statement para llamada de datos
             Statement stmt = con.createStatement();
+
+            System.out.println("Datos sin ordenar");
             //Creación de Query | llamada a todos los datos de la tabla alumnos
             ResultSet rs = stmt.executeQuery("select * from alumnos");
             //Ciclo de todos los elementos obtenidos por el query
             while (rs.next())
                 //Impresión de los valores
-                System.out.println(rs.getString(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
+                System.out.println(rs.getString(1) + "\t" + rs.getString(2) + " " + rs.getString(3) + "\t" + rs.getString(4));
+
+            System.out.println("Datos ordenados");
+
+            //Creación de Query | llamada a todos los datos de la tabla alumnos
+            ResultSet rs1 = stmt.executeQuery("SELECT * FROM alumnos ORDER BY Edad ASC");
+            //Ciclo de todos los elementos obtenidos por el query
+            while (rs1.next())
+                //Impresión de los valores
+                System.out.println(rs1.getString(1) + "\t" + rs1.getString(2) + " " + rs1.getString(3) + "\t" + rs1.getString(4));
             //Se cierra la conexión 
             con.close();
         } catch (Exception e) {
